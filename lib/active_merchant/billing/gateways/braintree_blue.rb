@@ -122,6 +122,7 @@ module ActiveMerchant #:nodoc:
             :last_name => creditcard.last_name,
             :email => options[:email],
             :credit_card => {
+              :cardholder_name => creditcard.name,
               :number => creditcard.number,
               :cvv => creditcard.verification_value,
               :expiration_month => creditcard.month.to_s.rjust(2, "0"),
@@ -147,6 +148,7 @@ module ActiveMerchant #:nodoc:
           options.merge!(:update_existing_token => braintree_credit_card.token)
           credit_card_params = merge_credit_card_options({
             :credit_card => {
+              :cardholder_name => creditcard.name,
               :number => creditcard.number,
               :cvv => creditcard.verification_value,
               :expiration_month => creditcard.month.to_s.rjust(2, "0"),
@@ -373,6 +375,7 @@ module ActiveMerchant #:nodoc:
             :last_name => credit_card_or_vault_id.last_name
           )
           parameters[:credit_card] = {
+            :cardholder_name => credit_card_or_vault_id.name,
             :number => credit_card_or_vault_id.number,
             :cvv => credit_card_or_vault_id.verification_value,
             :expiration_month => credit_card_or_vault_id.month.to_s.rjust(2, "0"),
